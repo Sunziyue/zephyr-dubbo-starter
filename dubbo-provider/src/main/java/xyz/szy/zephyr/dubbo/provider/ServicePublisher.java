@@ -39,6 +39,10 @@ public class ServicePublisher {
                     String name = this.dubboProperties.getApplication().getName();
                     log.info("DUBBO 服务{}启动成功", name);
                 }
+                // 程序暂停
+                HoldProcessor holdProcessor = new HoldProcessor();
+                holdProcessor.startAwait();
+                Runtime.getRuntime().addShutdownHook(new Thread(holdProcessor::stopAwait));
             } catch (Exception e) {
                 log.error("DUBBO 服务启动失败, cause:{}", Throwables.getStackTraceAsString(e));
                 throw new RuntimeException("DUBBO 服务启动失败", e);
