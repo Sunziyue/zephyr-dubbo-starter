@@ -1,11 +1,11 @@
-package xyz.sunziyue.dubbo.provider;
+package xyz.szy.zephyr.dubbo.provider;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import xyz.sunziyue.dubbo.common.DubboProperties;
+import xyz.szy.zephyr.dubbo.common.DubboProperties;
 
 @Configuration
 @ComponentScan

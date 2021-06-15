@@ -1,4 +1,4 @@
-package xyz.sunziyue.dubbo.provider;
+package xyz.szy.zephyr.dubbo.provider;
 
 import lombok.extern.slf4j.Slf4j;
 import com.alibaba.dubbo.config.MethodConfig;
@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Primary;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import xyz.sunziyue.dubbo.common.DubboProperties;
+import xyz.szy.zephyr.dubbo.common.DubboProperties;
 
 
 @Slf4j

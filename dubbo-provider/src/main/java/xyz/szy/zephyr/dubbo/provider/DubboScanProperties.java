@@ -1,4 +1,4 @@
-package xyz.sunziyue.dubbo.provider;
+package xyz.szy.zephyr.dubbo.provider;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

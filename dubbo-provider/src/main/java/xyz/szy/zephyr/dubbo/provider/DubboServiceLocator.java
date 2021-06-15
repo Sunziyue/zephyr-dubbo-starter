@@ -1,4 +1,4 @@
-package xyz.sunziyue.dubbo.provider;
+package xyz.szy.zephyr.dubbo.provider;
 
 import java.util.Set;
 

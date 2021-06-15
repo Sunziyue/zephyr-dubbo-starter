@@ -1,4 +1,4 @@
-package xyz.sunziyue.dubbo.provider;
+package xyz.szy.zephyr.dubbo.provider;
 
 import lombok.extern.slf4j.Slf4j;
 

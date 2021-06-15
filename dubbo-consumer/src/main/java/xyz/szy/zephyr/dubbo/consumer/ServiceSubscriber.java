@@ -1,9 +1,9 @@
-package xyz.sunziyue.dubbo.consumer;
+package xyz.szy.zephyr.dubbo.consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import xyz.sunziyue.dubbo.common.DubboProperties;
+import xyz.szy.zephyr.dubbo.common.DubboProperties;
 
 @Component
 public class ServiceSubscriber {

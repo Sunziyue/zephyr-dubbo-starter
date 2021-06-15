@@ -1,4 +1,4 @@
-package xyz.sunziyue.dubbo.provider;
+package xyz.szy.zephyr.dubbo.provider;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Throwables;

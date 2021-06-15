@@ -1,4 +1,4 @@
-package xyz.sunziyue.dubbo.provider;
+package xyz.szy.zephyr.dubbo.provider;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -86,7 +86,7 @@ public class JBoss6VFS extends VFS {
         }
 
         static JBoss6VFS.VirtualFile getChild(URL url) throws IOException {
-            Object o = xyz.sunziyue.dubbo.provider.VFS.invoke(getChild, VFS, url);
+            Object o = xyz.szy.zephyr.dubbo.provider.VFS.invoke(getChild, VFS, url);
             return o == null ? null : new JBoss6VFS.VirtualFile(o);
         }
     }
@@ -103,7 +103,7 @@ public class JBoss6VFS extends VFS {
 
         String getPathNameRelativeTo(JBoss6VFS.VirtualFile parent) {
             try {
-                return xyz.sunziyue.dubbo.provider.VFS.invoke(getPathNameRelativeTo, this.virtualFile, new Object[]{parent.virtualFile});
+                return xyz.szy.zephyr.dubbo.provider.VFS.invoke(getPathNameRelativeTo, this.virtualFile, new Object[]{parent.virtualFile});
             } catch (IOException var3) {
                 JBoss6VFS.log.error("This should not be possible. VirtualFile.getPathNameRelativeTo() threw IOException.");
                 return null;
@@ -111,7 +111,7 @@ public class JBoss6VFS extends VFS {
         }
 
         List<JBoss6VFS.VirtualFile> getChildren() throws IOException {
-            List<?> objects = xyz.sunziyue.dubbo.provider.VFS.invoke(getChildrenRecursively, this.virtualFile, new Object[0]);
+            List<?> objects = xyz.szy.zephyr.dubbo.provider.VFS.invoke(getChildrenRecursively, this.virtualFile, new Object[0]);
             List<JBoss6VFS.VirtualFile> children = new ArrayList<>(objects.size());
             for (Object object : objects) {
                 children.add(new VirtualFile(object));

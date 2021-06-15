@@ -1,4 +1,4 @@
-package xyz.sunziyue.dubbo.common;
+package xyz.szy.zephyr.dubbo.common;
 
 import com.alibaba.dubbo.config.*;
 import lombok.Data;
