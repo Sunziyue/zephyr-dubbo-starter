@@ -25,23 +25,23 @@ public class ServicePublisher {
     @EventListener
     public void publish(ContextRefreshedEvent event) {
         if (this.dubboProperties.getProtocol() != null) {
-            log.info("[DUBBO CONFIG] service export port: {}", this.dubboProperties.getProtocol().getPort());
-            log.info("[DUBBO CONFIG] service registry: {}", this.dubboProperties.getRegistry().getAddress());
+            log.info("[DUBBO CONFIG] 服务端口号: [{}]", this.dubboProperties.getProtocol().getPort());
+            log.info("[DUBBO CONFIG] 服务注册在: [{}]", this.dubboProperties.getRegistry().getAddress());
             try {
                 ApplicationContext applicationContext = event.getApplicationContext();
                 if (CollectionUtils.isEmpty(this.serviceLocator.services())) {
-                    log.error("No DUBBO service found");
-                    throw new RuntimeException("no DUBBO service to exported");
+                    log.error("未找到 DUBBO 服务");
+                    throw new RuntimeException("未找到 DUBBO 服务");
                 } else {
                     for (Class<?> serviceInterface : this.serviceLocator.services()) {
-                        (new ServiceExporter(applicationContext, this.dubboProperties)).service(serviceInterface).publish();
+                        new ServiceExporter(applicationContext, this.dubboProperties).service(serviceInterface).publish();
                     }
                     String name = this.dubboProperties.getApplication().getName();
-                    log.info("DUBBO service(name={}) start successfully", name);
+                    log.info("DUBBO 服务{}启动成功", name);
                 }
             } catch (Exception e) {
-                log.error("DUBBO service start failed, cause:{}", Throwables.getStackTraceAsString(e));
-                throw new RuntimeException("application start failed", e);
+                log.error("DUBBO 服务启动失败, cause:{}", Throwables.getStackTraceAsString(e));
+                throw new RuntimeException("DUBBO 服务启动失败", e);
             }
         }
     }

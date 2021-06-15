@@ -41,8 +41,8 @@ public class ServiceExporter {
         Map<String, ?> beans = this.applicationContext.getBeansOfType(service);
         if (CollectionUtils.isEmpty(beans)) {
             String interfaceName = service.getCanonicalName();
-            log.error("no implementation found for service interface:{}", interfaceName);
-            throw new RuntimeException("no implementation found for service interface: " + interfaceName);
+            log.error("找不到服务接口的实现:{}", interfaceName);
+            throw new RuntimeException("找不到服务接口的实现: " + interfaceName);
         } else {
             Collection<?> values = beans.values();
             if (values.size() > 1) {
@@ -102,9 +102,9 @@ public class ServiceExporter {
             this.provider.afterPropertiesSet();
             this.provider.export();
             this.published = true;
-            log.info("Dubbo service({}) published", this.uniqueName());
-        } catch (Exception var2) {
-            throw new RuntimeException("failed to publish DUBBO service " + this.provider.getInterface() + ":" + this.provider.getVersion(), var2);
+            log.info("Dubbo 服务({}) 已发布", this.uniqueName());
+        } catch (Exception e) {
+            throw new RuntimeException("发布 DUBBO 服务失败 " + this.provider.getInterface() + ":" + this.provider.getVersion(), e);
         }
     }
 
@@ -114,7 +114,7 @@ public class ServiceExporter {
         Primary primary;
         do {
             if (!beanIterator.hasNext()) {
-                throw new RuntimeException("multiple bean of type(" + interfaceType + ") has been found, and no one annotated with @Primary ");
+                throw new RuntimeException("已找到多个类型为(" + interfaceType + ") 的 bean, 并且没有使用 @Primary 进行注释");
             }
             beanName = beanIterator.next();
             primary = this.applicationContext.findAnnotationOnBean(beanName, Primary.class);
@@ -128,7 +128,7 @@ public class ServiceExporter {
 
     private void checkState() {
         if (this.published) {
-            throw new IllegalStateException("Dubbo provider has already been published");
+            throw new IllegalStateException("Dubbo 服务已经发布");
         }
     }
 }

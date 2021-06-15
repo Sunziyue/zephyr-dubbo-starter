@@ -53,16 +53,15 @@ public class ResolverUtil {
     public ResolverUtil find(ResolverUtil.Test test, String packageName) {
         String path = this.getPackagePath(packageName);
         try {
-            List<String> children = Objects.requireNonNull(VFS.getInstance()).list(path);
+            List<String> children = Objects.requireNonNull(SpringBootVFS.getInstance()).list(path);
             for (String child : children) {
                 if (child.endsWith(".class")) {
                     this.addIfMatching(test, child);
                 }
             }
         } catch (IOException e) {
-            log.error("Could not read package: " + packageName, e);
+            log.error("无法读取包: " + packageName, e);
         }
-
         return this;
     }
 
@@ -75,15 +74,14 @@ public class ResolverUtil {
             String externalName = fqn.substring(0, fqn.indexOf(46)).replace('/', '.');
             ClassLoader loader = this.getClassLoader();
             if (log.isDebugEnabled()) {
-                log.debug("Checking to see if class " + externalName + " matches criteria [" + test + "]");
+                log.debug("检查 " + externalName + " 类是否符合条件 [" + test + "]");
             }
-
             Class<?> type = loader.loadClass(externalName);
             if (test.matches(type)) {
                 this.matches.add(type);
             }
-        } catch (Throwable var6) {
-            log.warn("Could not examine class '" + fqn + "' due to a " + var6.getClass().getName() + " with message: " + var6.getMessage());
+        } catch (Throwable e) {
+            log.warn("无法检查类 '" + fqn + "' 由于一个 " + e.getClass().getName() + " 消息: " + e.getMessage());
         }
 
     }
@@ -95,12 +93,13 @@ public class ResolverUtil {
             this.annotation = annotation;
         }
 
-        public boolean matches(Class<?> type) {
-            return type != null && type.isAnnotationPresent(this.annotation);
+        @Override
+        public boolean matches(Class<?> clazz) {
+            return clazz != null && clazz.isAnnotationPresent(this.annotation);
         }
 
         public String toString() {
-            return "annotated with @" + this.annotation.getSimpleName();
+            return "用 @" + this.annotation.getSimpleName() + " 注解";
         }
     }
 
@@ -111,16 +110,17 @@ public class ResolverUtil {
             this.parent = parentType;
         }
 
-        public boolean matches(Class<?> type) {
-            return type != null && this.parent.isAssignableFrom(type);
+        @Override
+        public boolean matches(Class<?> clazz) {
+            return clazz != null && this.parent.isAssignableFrom(clazz);
         }
 
         public String toString() {
-            return "is assignable to " + this.parent.getSimpleName();
+            return "可分配给 " + this.parent.getSimpleName();
         }
     }
 
     public interface Test {
-        boolean matches(Class<?> var1);
+        boolean matches(Class<?> clazz);
     }
 }

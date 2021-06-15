@@ -6,21 +6,25 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpringBootVFS extends VFS {
+public class SpringBootVFS {
     private final ResourcePatternResolver resourceResolver = new PathMatchingResourcePatternResolver(this.getClass().getClassLoader());
 
-    public SpringBootVFS() {
+    private SpringBootVFS() {
     }
 
-    public boolean isValid() {
-        return true;
+    private static SpringBootVFS instance;
+
+    public static SpringBootVFS getInstance(){
+        if (instance == null) {
+            instance =  new SpringBootVFS();
+        }
+        return instance;
     }
 
-    protected List<String> list(URL url, String path) throws IOException {
+    protected List<String> list(String path) throws IOException {
         Resource[] resources = this.resourceResolver.getResources("classpath*:" + path + "/**/*.class");
         List<String> resourcePaths = new ArrayList<>();
         for (Resource resource : resources) {
