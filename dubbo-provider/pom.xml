@@ -5,7 +5,7 @@
     <parent>
         <artifactId>zephyr-dubbo-starter</artifactId>
         <groupId>xyz.sunziyue</groupId>
-        <version>2.3.0.RELEASE</version>
+        <version>1.0.0.SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,7 +15,7 @@
         <dependency>
             <groupId>xyz.sunziyue</groupId>
             <artifactId>dubbo-common</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
